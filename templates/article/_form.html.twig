@@ -1,0 +1,38 @@
+<script> let img_counter = 0;</script>
+{{ form_start(form) }}
+{% if article.photoPrincinpal %}
+
+    <img src="{{ asset('images/') }}{{ article.photoPrincinpal }}" alt="">
+{%  endif %}
+    {{ form_widget(form) }}
+  <a id="add_photo" class="btn" href="#">Ajouter une photo</a>
+
+
+    <button class="btn" id="btn_save">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+
+<script>
+
+   let add_photo = document.getElementById("add_photo");
+
+    add_photo.addEventListener("click", function () {
+
+        let list_photo = document.getElementById("article_photos");
+        let data_prototype = list_photo.getAttribute('data-prototype');
+        let btnSave = document.getElementById("btn_save");
+
+
+
+        let new_photo = document.createElement("input");
+        new_photo.setAttribute("name",`article[photos][${img_counter}][phoyo]`);
+        new_photo.setAttribute("type","file");
+        new_photo.setAttribute("id",`article_photos${img_counter}`);
+        let form = document.getElementsByName("article");
+        form[0].append(new_photo);
+        ++img_counter
+
+    });
+
+
+</script>
